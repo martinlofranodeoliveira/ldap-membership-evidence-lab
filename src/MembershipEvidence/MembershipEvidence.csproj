@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageId>LofranoTecnologia.MembershipEvidence</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Description>Bounded synthetic LDAP membership observations and cooperative evidence publication.</Description>
+    <NativeSource>$(MSBuildProjectDirectory)/../../native/owner.c</NativeSource>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Novell.Directory.Ldap.NETStandard" Version="4.0.0" />
+    <None Include="$(NativeOwnerOutput)" Link="ldap-evidence-owner" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" Pack="true" PackagePath="contentFiles/any/net10.0/" PackageCopyToOutput="true" PackageFlatten="true" />
+    <None Include="../../native/owner.c" Pack="true" PackagePath="native/owner.c" />
+    <None Include="../../README.md" Pack="true" PackagePath="README.md" />
+    <None Include="../../LICENSE" Pack="true" PackagePath="/" />
+    <None Include="../../buildTransitive/LofranoTecnologia.MembershipEvidence.targets" Pack="true" PackagePath="buildTransitive/LofranoTecnologia.MembershipEvidence.targets" />
+  </ItemGroup>
+  <Target Name="BuildNativeOwner" BeforeTargets="PrepareForBuild" Inputs="$(NativeSource)" Outputs="$(NativeOwnerOutput)">
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(NativeOwnerOutput)'))" />
+    <Exec Command="cc -std=c11 -D_GNU_SOURCE -Wall -Wextra -Werror -O2 &quot;$(NativeSource)&quot; -o &quot;$(NativeOwnerOutput)&quot;" />
+  </Target>
+</Project>

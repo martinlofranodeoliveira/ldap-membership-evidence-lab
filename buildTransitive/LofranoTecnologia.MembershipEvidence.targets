@@ -1,0 +1,6 @@
+<Project>
+  <Target Name="LofranoMakeOwnerExecutable" AfterTargets="CopyFilesToOutputDirectory;Publish" Condition="$([MSBuild]::IsOSPlatform('Linux'))">
+    <Exec Command="chmod u+x &quot;$(TargetDir)ldap-evidence-owner&quot;" Condition="Exists('$(TargetDir)ldap-evidence-owner')" />
+    <Exec Command="chmod u+x &quot;$(PublishDir)ldap-evidence-owner&quot;" Condition="'$(PublishDir)' != '' and Exists('$(PublishDir)ldap-evidence-owner')" />
+  </Target>
+</Project>

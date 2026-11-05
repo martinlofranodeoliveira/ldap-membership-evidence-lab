@@ -1,0 +1,10 @@
+build/
+**/bin/
+**/obj/
+.nuget/
+.home/
+TestResults/
+*.user
+*.suo
+*.nupkg
+*.snupkg

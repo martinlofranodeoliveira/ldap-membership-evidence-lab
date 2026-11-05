@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions": {
+        "type": "Transitive",
+        "resolved": "9.0.2",
+        "contentHash": "MNe7GSTBf3jQx5vYrXF0NZvn6l7hUKF6J54ENfAgCO8y6xjN1XUmKKWG464LP2ye6QqDiA1dkaWEZBYnhoZzjg=="
+      },
+      "Microsoft.Extensions.Logging.Abstractions": {
+        "type": "Transitive",
+        "resolved": "9.0.2",
+        "contentHash": "dV9s2Lamc8jSaqhl2BQSPn/AryDIH2sSbQUyLitLXV0ROmsb+SROnn2cH939JFbsNrnf3mIM3GNRKT7P0ldwLg==",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2"
+        }
+      },
+      "Novell.Directory.Ldap.NETStandard": {
+        "type": "Transitive",
+        "resolved": "4.0.0",
+        "contentHash": "qyaOhuyv5nhp35yK3X0cBa+pnuVyOqec37LKQDzRSmFPECn6d1cnxBCrJdaqgaWuvOQtWa1rqlEaZyp+lpcXZQ==",
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.2"
+        }
+      },
+      "LofranoTecnologia.MembershipEvidence": {
+        "type": "Project",
+        "dependencies": {
+          "Novell.Directory.Ldap.NETStandard": "[4.0.0, )"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+name: offline-synthetic-tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare dependencies and compile original native owner
+        timeout-minutes: 12
+        run: docker build --tag ldap-membership-local .
+      - name: Native MTP tests without external networking
+        timeout-minutes: 4
+        run: docker run --rm --network none --cap-drop ALL --security-opt no-new-privileges --pids-limit 256 --memory 1g --cpus 2 --user 1000:1000 ldap-membership-local dotnet test --solution MembershipEvidence.sln --no-restore --configuration Release --minimum-expected-tests 10
+      - name: Deterministic offline demo
+        timeout-minutes: 2
+        run: docker run --rm --network none --cap-drop ALL --security-opt no-new-privileges --pids-limit 256 --memory 1g --cpus 2 --user 1000:1000 ldap-membership-local dotnet run --no-restore --project src/MembershipEvidence.Cli -- demo --assert
